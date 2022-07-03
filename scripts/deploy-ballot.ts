@@ -13,7 +13,7 @@ function convertStringArrayToBytes32(array: string[]) {
 async function main(
   signer: ethers.Wallet,
   tokenContractAddress: string,
-  ...proposals: string[]
+  proposals: string[]
 ) {
   if (proposals.length < 2) throw new Error("Not enough proposals provided");
   proposals.forEach((element, index) => {
