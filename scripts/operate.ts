@@ -1,6 +1,7 @@
 /* eslint-disable node/no-missing-import */
 import deployMyToken from "./deploy-my-token";
 import mintingToken from "./minting-token";
+import delegate from "./delegate";
 import { getWalletSigner } from "./get-wallet-signer";
 import { MyToken } from "../typechain";
 import { Contract } from "ethers";
@@ -26,7 +27,10 @@ async function main() {
   );
   console.log("Minter role transaction: ", minterRoleTx.hash);
 
-  mintingToken(tokenContract, minterSigner);
+  await mintingToken(tokenContract, minterSigner);
+
+  const delegatee = getWalletSigner(undefined, process.env.PRIVATE_KEY_3);
+  await delegate(tokenContract, minterSigner, delegatee);
 }
 
 main().catch((error) => {
