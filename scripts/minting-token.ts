@@ -7,7 +7,10 @@ async function main(tokenContract: MyToken, mintAccount: ethers.Wallet) {
   const BASE_VOTE_POWER = 10;
 
   const preMintVotePower = await tokenContract.getVotes(mintAccount.address);
-  console.log("Premint vote power: ", preMintVotePower);
+  console.log(
+    "Premint vote power: ",
+    ethers.utils.formatEther(preMintVotePower)
+  );
 
   const mintTx = await tokenContract.mint(
     mintAccount.address,
@@ -17,7 +20,10 @@ async function main(tokenContract: MyToken, mintAccount: ethers.Wallet) {
   console.log("Mint transaction: ", mintTx.hash);
 
   const postMintVotePower = await tokenContract.getVotes(mintAccount.address);
-  console.log("Postmint vote power: ", postMintVotePower);
+  console.log(
+    "Postmint vote power: ",
+    ethers.utils.formatEther(postMintVotePower)
+  );
 }
 
 export default main;
