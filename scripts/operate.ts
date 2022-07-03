@@ -2,14 +2,18 @@
 import deployMyToken from "./deploy-my-token";
 import deployBallot from "./deploy-ballot";
 import mintingToken from "./minting-token";
+import ballotVote from "./ballot-vote";
 import delegate from "./delegate";
 import { getWalletSigner } from "./get-wallet-signer";
-import { MyToken } from "../typechain";
+import { CustomBallot, MyToken } from "../typechain";
 import { Contract } from "ethers";
 import * as myTokenJson from "../artifacts/contracts/Token.sol/MyToken.json";
 import * as ballotJson from "../artifacts/contracts/CustomBallot.sol/CustomBallot.json";
 
 async function main() {
+  const USED_VOTE_POWER = 5;
+  const PROPOSALS = ["Tomato", "Potato", "Carrot", "Cucumber"];
+
   const ownerSigner = getWalletSigner(undefined, process.env.PRIVATE_KEY);
   console.log("Owner signer address: ", ownerSigner.address);
 
@@ -38,20 +42,19 @@ async function main() {
   const ballotContractAddress =
     process.argv.length >= 4 ? process.argv[3] : undefined;
   console.log("Argument Ballot contract address: ", ballotContractAddress);
-  const ballotContract = !ballotContractAddress
-    ? await deployBallot(
+  const ballotContract: CustomBallot = !ballotContractAddress
+    ? ((await deployBallot(
         ownerSigner,
         tokenContract.address,
-        "Tomato",
-        "Potato",
-        "Carrot",
-        "Cucumber"
-      )
+        PROPOSALS
+      )) as CustomBallot)
     : (new Contract(
         ballotContractAddress,
         ballotJson.abi,
         ownerSigner
-      ) as MyToken);
+      ) as CustomBallot);
+
+  await ballotVote(ballotContract, delegatee, USED_VOTE_POWER, PROPOSALS);
 }
 
 main().catch((error) => {
