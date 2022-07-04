@@ -1,5 +1,16 @@
 # Week 2 Project
 
+Here is the first run addresses and hashes:
+```script
+Token contract address: 0x7e5C1F81EeCCb13Bcf2636dB47950a8dEc799acD
+Minter signer address:  0x0A67bc92bd7023559001e4CF230D46180194317D
+Minter role transaction:  0x7d72bd4e0e97317197cba58d17ea9ae88cef7a1d03edea37cfa9f0be093adab6
+Mint transaction:  0xea37b87ae6b56a320204d15955c236f191b0a838541f47341a764d2cd8b4ec84
+Delegate transaction:  0x80630d31caa7d7d257fe640b72293522ae6eafbb3667ee4fd812ace21824c590
+Ballot Contract address: 0x3De9A52aC328Ab1243bF51D3c32668bf07533Cc7
+Voting Transaction: 0xebe0fa8c1d72d0d60dcc9c79add959239c21dfc6e259e584b74fad6b5b589ebf
+```
+
 Before starting you should create .env file, copy .env.example content to it, and update values.
 
 Here is the steps
