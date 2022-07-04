@@ -1,5 +1,7 @@
 # Week 2 Project
 
+Before starting you should create .env file, copy .env.example content to it, and update values.
+
 Here is the steps
 
 ```shell
